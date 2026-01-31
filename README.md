@@ -4,7 +4,14 @@ A collection of AI agent skills providing expert knowledge for developing, testi
 
 ## Overview
 
-This repository is a Claude Code Plugin that equips AI assistants with specialized knowledge about subgraph development. It covers schema design, mapping handlers, performance optimization, and testing strategies.
+This repository provides subgraph development expertise for AI coding assistants in **two formats**:
+
+| Format | Location | Use With |
+|--------|----------|----------|
+| **Claude Code Plugin** | `skills/` | Claude Code CLI |
+| **OpenClaw Skills** | `openclaw/` | OpenClaw / Clawdbot |
+
+Same knowledge, different agent platforms.
 
 ## Skills
 
@@ -43,38 +50,58 @@ Quality assurance with Matchstick and Subgraph Linter:
 
 ```bash
 # Add as a Claude Code plugin
-claude plugins add buildlin/subgraphs-skills
+claude plugins add PaulieB14/subgraphs-skills
+```
+
+### OpenClaw / Clawdbot
+
+```bash
+# Copy skills to OpenClaw directory
+cp -r openclaw/subgraph-* ~/.openclaw/skills/
+
+# Or via ClawHub (when published)
+clawdbot skill install subgraph-dev
+clawdbot skill install subgraph-optimization
+clawdbot skill install subgraph-testing
 ```
 
 ### Manual
 
-Clone this repository and reference it in your Claude Code configuration.
+Clone this repository and reference it in your agent's configuration.
 
 ## Repository Structure
 
 ```
 subgraphs-skills/
 ├── .claude-plugin/
-│   └── manifest.json         # Plugin metadata
-├── skills/
+│   └── manifest.json           # Claude Code plugin metadata
+├── skills/                     # Claude Code format
 │   ├── subgraph-dev/
-│   │   ├── SKILL.md          # Development expertise
+│   │   ├── SKILL.md
 │   │   └── references/
 │   │       ├── schema-types.md
 │   │       ├── assemblyscript-api.md
 │   │       ├── subgraph-composition.md
 │   │       └── subgraph-uncrashable.md
 │   ├── subgraph-optimization/
-│   │   ├── SKILL.md          # Optimization best practices
+│   │   ├── SKILL.md
 │   │   └── references/
 │   │       └── performance-benchmarks.md
 │   └── subgraph-testing/
-│       ├── SKILL.md          # Testing patterns
+│       ├── SKILL.md
 │       └── references/
 │           ├── matchstick-api.md
 │           └── subgraph-linter.md
-├── examples/                  # Usage examples
-├── scripts/                   # Utility scripts
+├── openclaw/                   # OpenClaw format (YAML frontmatter)
+│   ├── README.md
+│   ├── subgraph-dev/
+│   │   └── SKILL.md
+│   ├── subgraph-optimization/
+│   │   └── SKILL.md
+│   └── subgraph-testing/
+│       └── SKILL.md
+├── examples/
+├── scripts/
 ├── package.json
 └── README.md
 ```
