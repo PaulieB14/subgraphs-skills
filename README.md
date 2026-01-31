@@ -1,5 +1,10 @@
 # Subgraphs Skills
 
+[![Claude Code](https://img.shields.io/badge/Claude%20Code-Plugin-blueviolet)](https://claude.ai/claude-code)
+[![OpenClaw](https://img.shields.io/badge/OpenClaw-Skills-orange)](https://github.com/openclaw/openclaw)
+[![The Graph](https://img.shields.io/badge/The%20Graph-Subgraphs-blue)](https://thegraph.com/)
+[![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
+
 A collection of AI agent skills providing expert knowledge for developing, testing, and deploying subgraphs with [The Graph](https://thegraph.com/) protocol.
 
 ## Overview
@@ -129,9 +134,25 @@ Once installed, the AI assistant will have access to subgraph development expert
 - [Matchstick Testing Framework](https://thegraph.com/docs/en/subgraphs/developing/creating/unit-testing-framework/)
 - [AssemblyScript API](https://thegraph.com/docs/en/subgraphs/developing/creating/assemblyscript-api/)
 
+## Platforms
+
+This skill pack works with:
+
+| Platform | Description | Link |
+|----------|-------------|------|
+| **Claude Code** | Anthropic's official CLI for Claude | [claude.ai/claude-code](https://claude.ai/claude-code) |
+| **OpenClaw** | Open-source AI agent framework | [github.com/openclaw/openclaw](https://github.com/openclaw/openclaw) |
+
 ## Contributing
 
 Contributions are welcome! Please feel free to submit issues and pull requests.
+
+## Acknowledgments
+
+- Built with [Claude](https://claude.ai) (Anthropic's AI assistant)
+- Subgraph expertise from [The Graph Documentation](https://thegraph.com/docs/)
+- Inspired by [AGENTS.md](https://github.com/agentsmd/agents.md) format
+- OpenClaw format based on [substreams-skills](https://github.com/streamingfast/substreams-skills)
 
 ## License
 
