@@ -1,0 +1,35 @@
+# ERC20 Token Tracker - Example Schema
+# Tracks tokens, transfers, and holder balances
+
+type Token @entity {
+  id: Bytes!                    # Token contract address
+  name: String!
+  symbol: String!
+  decimals: Int!
+  totalSupply: BigInt!
+  holderCount: BigInt!
+  transferCount: BigInt!
+
+  # Derived relationships
+  holders: [TokenBalance!]! @derivedFrom(field: "token")
+  transfers: [Transfer!]! @derivedFrom(field: "token")
+}
+
+type TokenBalance @entity {
+  id: Bytes!                    # token address + holder address
+  token: Token!
+  holder: Bytes!
+  amount: BigInt!
+  lastUpdated: BigInt!
+}
+
+type Transfer @entity(immutable: true) {
+  id: Bytes!                    # tx hash + log index
+  token: Token!
+  from: Bytes!
+  to: Bytes!
+  amount: BigInt!
+  timestamp: BigInt!
+  blockNumber: BigInt!
+  transactionHash: Bytes!
+}

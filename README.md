@@ -28,6 +28,7 @@ Core development knowledge including:
 - Data source templates
 - Contract bindings and calls
 - **Subgraph Composition** - Combine multiple subgraphs
+- **Common Patterns** - ERC20, DEX, NFT, Lending, Staking, Governance
 - Subgraph Uncrashable (safe code generation)
 - Deployment workflows
 
@@ -43,6 +44,7 @@ Performance best practices from The Graph docs:
 ### 🧪 subgraph-testing
 Quality assurance with Matchstick and Subgraph Linter:
 - **Subgraph Linter** - Static analysis to catch bugs before runtime
+- **Common Errors** - Troubleshooting guide for indexing issues
 - Unit testing setup and patterns with Matchstick
 - Mock events and contract calls
 - Entity assertions
@@ -87,7 +89,8 @@ subgraphs-skills/
 │   │       ├── schema-types.md
 │   │       ├── assemblyscript-api.md
 │   │       ├── subgraph-composition.md
-│   │       └── subgraph-uncrashable.md
+│   │       ├── subgraph-uncrashable.md
+│   │       └── patterns.md
 │   ├── subgraph-optimization/
 │   │   ├── SKILL.md
 │   │   └── references/
@@ -96,7 +99,8 @@ subgraphs-skills/
 │       ├── SKILL.md
 │       └── references/
 │           ├── matchstick-api.md
-│           └── subgraph-linter.md
+│           ├── subgraph-linter.md
+│           └── common-errors.md
 ├── openclaw/                   # OpenClaw format (YAML frontmatter)
 │   ├── README.md
 │   ├── subgraph-dev/
@@ -105,7 +109,9 @@ subgraphs-skills/
 │   │   └── SKILL.md
 │   └── subgraph-testing/
 │       └── SKILL.md
-├── examples/
+├── examples/                   # Working code examples
+│   ├── README.md
+│   └── erc20-token/
 ├── scripts/
 ├── package.json
 └── README.md
