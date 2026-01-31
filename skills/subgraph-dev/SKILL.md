@@ -307,6 +307,59 @@ if (entity == null) {
 entity.save()
 ```
 
+## Subgraph Composition
+
+Combine multiple subgraphs into a single composed subgraph for data aggregation.
+
+### Configuration
+
+```yaml
+# composed-subgraph/subgraph.yaml
+specVersion: 1.3.0
+schema:
+  file: ./schema.graphql
+dataSources:
+  - kind: subgraph
+    name: TokenSource
+    network: mainnet
+    source:
+      address: "QmSourceSubgraphId..."  # Deployment ID
+      startBlock: 18000000
+    mapping:
+      kind: subgraph/triggers
+      apiVersion: 0.0.9
+      language: wasm/assemblyscript
+      entities:
+        - AggregatedData
+      triggers:
+        - entity: Token
+          handler: handleToken
+      file: ./src/composition.ts
+```
+
+### Handler
+
+```typescript
+import { Token } from "../generated/TokenSource/schema"
+import { AggregatedData } from "../generated/schema"
+
+export function handleToken(entity: Token): void {
+  let data = AggregatedData.load(entity.id)
+  if (data == null) {
+    data = new AggregatedData(entity.id)
+  }
+  data.tokenName = entity.name
+  data.save()
+}
+```
+
+### Requirements
+
+- Source subgraphs: specVersion 1.3.0+, immutable entities only
+- Composed subgraphs: max 5 sources, same chain, no nesting
+
+See [subgraph-composition.md](references/subgraph-composition.md) for full details.
+
 ## Networks
 
 Supported networks include:
@@ -329,3 +382,5 @@ See full list: https://thegraph.com/docs/en/supported-networks/
 - [The Graph Documentation](https://thegraph.com/docs/)
 - [AssemblyScript API](https://thegraph.com/docs/en/subgraphs/developing/creating/assemblyscript-api/)
 - [Schema Reference](https://thegraph.com/docs/en/subgraphs/developing/creating/creating-a-subgraph/#the-graphql-schema)
+- [Subgraph Composition](https://thegraph.com/docs/en/subgraphs/guides/subgraph-composition/)
+- [Subgraph Uncrashable](https://thegraph.com/docs/en/subgraphs/developing/subgraph-uncrashable/)

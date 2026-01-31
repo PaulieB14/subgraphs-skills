@@ -15,6 +15,7 @@ Core development knowledge including:
 - AssemblyScript mapping handlers
 - Data source templates
 - Contract bindings and calls
+- **Subgraph Composition** - Combine multiple subgraphs
 - Subgraph Uncrashable (safe code generation)
 - Deployment workflows
 
@@ -61,6 +62,7 @@ subgraphs-skills/
 │   │   └── references/
 │   │       ├── schema-types.md
 │   │       ├── assemblyscript-api.md
+│   │       ├── subgraph-composition.md
 │   │       └── subgraph-uncrashable.md
 │   ├── subgraph-optimization/
 │   │   ├── SKILL.md          # Optimization best practices
@@ -94,6 +96,7 @@ Once installed, the AI assistant will have access to subgraph development expert
 
 - [The Graph Documentation](https://thegraph.com/docs/)
 - [Subgraph Best Practices](https://thegraph.com/docs/en/subgraphs/best-practices/pruning/)
+- [Subgraph Composition](https://thegraph.com/docs/en/subgraphs/guides/subgraph-composition/) - Combine multiple subgraphs
 - [Subgraph Linter](https://thegraph.com/docs/en/subgraphs/developing/subgraph-linter/) - Static analysis tool
 - [Subgraph Uncrashable](https://thegraph.com/docs/en/subgraphs/developing/subgraph-uncrashable/) - Safe code generation
 - [Matchstick Testing Framework](https://thegraph.com/docs/en/subgraphs/developing/creating/unit-testing-framework/)
