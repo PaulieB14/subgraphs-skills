@@ -15,6 +15,7 @@ Core development knowledge including:
 - AssemblyScript mapping handlers
 - Data source templates
 - Contract bindings and calls
+- Subgraph Uncrashable (safe code generation)
 - Deployment workflows
 
 ### ⚡ subgraph-optimization
@@ -27,8 +28,9 @@ Performance best practices from The Graph docs:
 - Grafting for hotfixes
 
 ### 🧪 subgraph-testing
-Testing strategies with Matchstick:
-- Unit testing setup and patterns
+Quality assurance with Matchstick and Subgraph Linter:
+- **Subgraph Linter** - Static analysis to catch bugs before runtime
+- Unit testing setup and patterns with Matchstick
 - Mock events and contract calls
 - Entity assertions
 - Data source mocking
@@ -58,7 +60,8 @@ subgraphs-skills/
 │   │   ├── SKILL.md          # Development expertise
 │   │   └── references/
 │   │       ├── schema-types.md
-│   │       └── assemblyscript-api.md
+│   │       ├── assemblyscript-api.md
+│   │       └── subgraph-uncrashable.md
 │   ├── subgraph-optimization/
 │   │   ├── SKILL.md          # Optimization best practices
 │   │   └── references/
@@ -66,7 +69,8 @@ subgraphs-skills/
 │   └── subgraph-testing/
 │       ├── SKILL.md          # Testing patterns
 │       └── references/
-│           └── matchstick-api.md
+│           ├── matchstick-api.md
+│           └── subgraph-linter.md
 ├── examples/                  # Usage examples
 ├── scripts/                   # Utility scripts
 ├── package.json
@@ -90,6 +94,8 @@ Once installed, the AI assistant will have access to subgraph development expert
 
 - [The Graph Documentation](https://thegraph.com/docs/)
 - [Subgraph Best Practices](https://thegraph.com/docs/en/subgraphs/best-practices/pruning/)
+- [Subgraph Linter](https://thegraph.com/docs/en/subgraphs/developing/subgraph-linter/) - Static analysis tool
+- [Subgraph Uncrashable](https://thegraph.com/docs/en/subgraphs/developing/subgraph-uncrashable/) - Safe code generation
 - [Matchstick Testing Framework](https://thegraph.com/docs/en/subgraphs/developing/creating/unit-testing-framework/)
 - [AssemblyScript API](https://thegraph.com/docs/en/subgraphs/developing/creating/assemblyscript-api/)
 

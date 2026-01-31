@@ -1,10 +1,138 @@
 # Subgraph Testing Skill
 
-Expert knowledge for testing subgraphs using Matchstick framework and integration testing patterns.
+Expert knowledge for testing subgraphs using Matchstick framework, Subgraph Linter, and integration testing patterns.
 
 ## Overview
 
-Subgraph testing ensures mapping handlers work correctly before deployment. The primary testing framework is **Matchstick**, which provides unit testing capabilities for AssemblyScript mappings.
+Subgraph quality assurance involves three complementary approaches:
+
+1. **Static Analysis (Subgraph Linter)** - Catches bugs before runtime
+2. **Unit Testing (Matchstick)** - Tests mapping logic in isolation
+3. **Integration Testing** - Validates end-to-end behavior
+
+## Subgraph Linter
+
+Subgraph Linter is a static analysis tool that detects common patterns leading to runtime crashes, corrupted entity state, or silent data errors—before deployment.
+
+### When to Use
+
+Run Subgraph Linter to detect issues that compile fine but crash at runtime:
+
+- Entities saved with missing required fields
+- Entity overwrite from stale instances after helpers
+- Optional values force-unwrapped without null checks
+- Division without zero-denominator guards
+- @derivedFrom fields mutated directly
+- Contract calls not declared in manifest
+
+### Installation
+
+```bash
+# CLI
+git clone https://github.com/graphprotocol/subgraph-linter.git
+cd subgraph-linter && npm install && npm run build
+
+# VS Code Extension - install from marketplace
+```
+
+### CLI Usage
+
+```bash
+# Run against manifest
+npm run check -- --manifest ../your-subgraph/subgraph.yaml
+
+# With custom tsconfig
+npm run check -- --manifest ../subgraph.yaml --tsconfig ../tsconfig.json
+
+# With config file
+npm run check -- --manifest ../subgraph.yaml --config ./subgraph-linter.config.json
+```
+
+### Key Checks
+
+| Check | Detects |
+|-------|---------|
+| `entity-overwrite` | Stale entity saves after helper modifications |
+| `unexpected-null` | Missing required fields, @derivedFrom mutations |
+| `unchecked-load` | `Entity.load()!` without null handling |
+| `unchecked-nonnull` | `value!` on optional fields |
+| `division-guard` | Division with potentially zero denominator |
+| `derived-field-guard` | Derived fields not recomputed before save |
+| `helper-return-contract` | Helpers returning uninitialized entities |
+| `undeclared-eth-call` | Contract calls not in manifest `calls:` block |
+
+### Common Patterns to Fix
+
+```typescript
+// BAD - unchecked-load
+let token = Token.load(address)!
+
+// GOOD - explicit null check
+let token = Token.load(address)
+if (token == null) {
+  token = new Token(address)
+  // initialize all required fields
+}
+```
+
+```typescript
+// BAD - entity-overwrite
+let token = Token.load(address)!
+updateTokenMetrics(address)  // Helper saves token
+token.lastUpdate = timestamp
+token.save()  // Overwrites helper's changes!
+
+// GOOD - reload after helper
+updateTokenMetrics(address)
+let token = Token.load(address)!
+token.lastUpdate = timestamp
+token.save()
+```
+
+```typescript
+// BAD - division-guard
+let price = amountOut.div(amountIn)
+
+// GOOD - guard zero
+if (amountIn.gt(BigInt.zero())) {
+  let price = amountOut.div(amountIn)
+}
+```
+
+### Configuration
+
+Create `subgraph-linter.config.json`:
+
+```json
+{
+  "severityOverrides": {
+    "division-guard": "error",
+    "undeclared-eth-call": "warning"
+  },
+  "suppression": {
+    "allowWarnings": true,
+    "allowErrors": true
+  }
+}
+```
+
+### Inline Suppression
+
+```typescript
+// Suppress specific check when you know it's safe
+// [allow(derived-field-guard)]
+entity.save()
+
+// Suppress all checks on line
+// [allow(all)]
+riskyButSafeOperation()
+```
+
+---
+
+## Matchstick Unit Testing
+
+Matchstick provides unit testing capabilities for AssemblyScript mappings.
 
 ## Matchstick Setup
 
@@ -437,8 +565,50 @@ tests/
 4. **Missing event metadata**: Set block, timestamp, tx hash
 5. **Not testing null cases**: Entity.load() can return null
 
+## Complete Quality Workflow
+
+1. **Write code** with VS Code Subgraph Linter extension for real-time feedback
+2. **Generate safe helpers** with Subgraph Uncrashable (optional)
+3. **Run static analysis** with Subgraph Linter CLI before commit
+4. **Write unit tests** with Matchstick for handler logic
+5. **Integration test** with local graph-node
+6. **CI pipeline** runs linter + tests before merge
+
+```yaml
+# .github/workflows/quality.yml
+name: Subgraph Quality
+
+on: [push, pull_request]
+
+jobs:
+  quality:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Generate types
+        run: npm run codegen
+
+      - name: Run Subgraph Linter
+        run: npx subgraph-linter --manifest subgraph.yaml
+
+      - name: Run tests
+        run: npm test
+
+      - name: Build
+        run: npm run build
+```
+
 ## References
 
 - [Matchstick Documentation](https://thegraph.com/docs/en/subgraphs/developing/creating/unit-testing-framework/)
 - [Matchstick GitHub](https://github.com/LimeChain/matchstick)
+- [Subgraph Linter](https://thegraph.com/docs/en/subgraphs/developing/subgraph-linter/)
+- [Subgraph Uncrashable](https://thegraph.com/docs/en/subgraphs/developing/subgraph-uncrashable/)
 - [AssemblyScript Testing Patterns](https://thegraph.com/docs/en/subgraphs/developing/creating/unit-testing-framework/#writing-tests)
