@@ -1,0 +1,24 @@
+{
+  "name": "subgraphs-skills",
+  "version": "1.0.0",
+  "description": "AI agent skills for developing, testing, and optimizing subgraphs with The Graph protocol",
+  "author": "buildlin",
+  "license": "MIT",
+  "keywords": [
+    "thegraph",
+    "subgraph",
+    "blockchain",
+    "indexing",
+    "graphql",
+    "web3",
+    "claude-code",
+    "ai-agent"
+  ],
+  "scripts": {
+    "validate": "node scripts/validate.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/buildlin/subgraphs-skills"
+  }
+}

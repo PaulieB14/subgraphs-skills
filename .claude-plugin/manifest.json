@@ -1,0 +1,31 @@
+{
+  "name": "subgraphs-skills",
+  "version": "1.0.0",
+  "description": "AI agent skills for developing, testing, and optimizing subgraphs with The Graph protocol",
+  "author": "buildlin",
+  "skills": [
+    {
+      "name": "subgraph-dev",
+      "path": "skills/subgraph-dev",
+      "description": "Expert knowledge for subgraph development including schema design, mappings, and deployment"
+    },
+    {
+      "name": "subgraph-optimization",
+      "path": "skills/subgraph-optimization",
+      "description": "Best practices for optimizing subgraph performance and indexing speed"
+    },
+    {
+      "name": "subgraph-testing",
+      "path": "skills/subgraph-testing",
+      "description": "Testing strategies using Matchstick and integration testing patterns"
+    }
+  ],
+  "keywords": [
+    "thegraph",
+    "subgraph",
+    "blockchain",
+    "indexing",
+    "graphql",
+    "web3"
+  ]
+}
