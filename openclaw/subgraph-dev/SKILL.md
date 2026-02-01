@@ -1,19 +1,24 @@
 ---
 name: subgraph-dev
-description: Expert knowledge for developing subgraphs with The Graph protocol - schema design, mappings, deployment
+description: "Expert knowledge for developing subgraphs with The Graph protocol. Covers schema design, AssemblyScript mappings, manifest configuration, and deployment workflows."
 metadata:
   openclaw:
     emoji: 📊
-    category: blockchain
-    tags:
-      - thegraph
-      - subgraph
-      - web3
-      - indexing
-    binary: graph
+    requires:
+      bins: ["graph"]
     install:
-      npm: "@graphprotocol/graph-cli"
-      brew: graph-cli
+      - id: npm
+        kind: npm
+        package: "@graphprotocol/graph-cli"
+        global: true
+        bins: ["graph"]
+        label: "Install Graph CLI (npm)"
+      - id: yarn
+        kind: yarn
+        package: "@graphprotocol/graph-cli"
+        global: true
+        bins: ["graph"]
+        label: "Install Graph CLI (yarn)"
 ---
 
 # Subgraph Development Skill

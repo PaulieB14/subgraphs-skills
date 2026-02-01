@@ -1,18 +1,24 @@
 ---
 name: subgraph-testing
-description: Quality assurance for subgraphs - Matchstick unit testing, Subgraph Linter static analysis, CI/CD
+description: "Quality assurance for subgraphs using Matchstick unit testing, Subgraph Linter static analysis, and CI/CD integration. Includes common error troubleshooting."
 metadata:
   openclaw:
     emoji: 🧪
-    category: blockchain
-    tags:
-      - thegraph
-      - testing
-      - linting
-      - matchstick
-    binary: graph
+    requires:
+      bins: ["graph"]
     install:
-      npm: "matchstick-as"
+      - id: npm-graph
+        kind: npm
+        package: "@graphprotocol/graph-cli"
+        global: true
+        bins: ["graph"]
+        label: "Install Graph CLI (npm)"
+      - id: npm-matchstick
+        kind: npm
+        package: "matchstick-as"
+        global: false
+        bins: []
+        label: "Install Matchstick (dev dependency)"
 ---
 
 # Subgraph Testing Skill

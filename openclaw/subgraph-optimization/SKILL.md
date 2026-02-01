@@ -1,18 +1,24 @@
 ---
 name: subgraph-optimization
-description: Best practices for optimizing subgraph performance, indexing speed, and query responsiveness
+description: "Best practices for optimizing subgraph performance, indexing speed, and query responsiveness. Covers pruning, @derivedFrom, immutable entities, avoiding eth_calls, timeseries, and grafting."
 metadata:
   openclaw:
     emoji: ⚡
-    category: blockchain
-    tags:
-      - thegraph
-      - performance
-      - optimization
-      - indexing
-    binary: graph
+    requires:
+      bins: ["graph"]
     install:
-      npm: "@graphprotocol/graph-cli"
+      - id: npm
+        kind: npm
+        package: "@graphprotocol/graph-cli"
+        global: true
+        bins: ["graph"]
+        label: "Install Graph CLI (npm)"
+      - id: yarn
+        kind: yarn
+        package: "@graphprotocol/graph-cli"
+        global: true
+        bins: ["graph"]
+        label: "Install Graph CLI (yarn)"
 ---
 
 # Subgraph Optimization Skill

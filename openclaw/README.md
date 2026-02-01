@@ -30,22 +30,47 @@ cp -r openclaw/subgraph-* ~/.openclaw/skills/
 
 ## Skill Format
 
-Each skill uses YAML frontmatter:
+Each skill uses YAML frontmatter matching the official OpenClaw format:
 
 ```yaml
 ---
 name: subgraph-dev
-description: Expert knowledge for developing subgraphs
+description: "Expert knowledge for developing subgraphs with The Graph protocol."
 metadata:
   openclaw:
     emoji: 📊
-    category: blockchain
-    tags: [thegraph, subgraph, web3]
-    binary: graph
+    requires:
+      bins: ["graph"]
     install:
-      npm: "@graphprotocol/graph-cli"
+      - id: npm
+        kind: npm
+        package: "@graphprotocol/graph-cli"
+        global: true
+        bins: ["graph"]
+        label: "Install Graph CLI (npm)"
+      - id: yarn
+        kind: yarn
+        package: "@graphprotocol/graph-cli"
+        global: true
+        bins: ["graph"]
+        label: "Install Graph CLI (yarn)"
 ---
 ```
+
+### Frontmatter Fields
+
+| Field | Description |
+|-------|-------------|
+| `name` | Skill identifier |
+| `description` | Brief description (quoted) |
+| `metadata.openclaw.emoji` | Display emoji |
+| `metadata.openclaw.requires.bins` | Required binaries |
+| `metadata.openclaw.install` | Installation methods array |
+| `install[].id` | Unique installer ID |
+| `install[].kind` | Installer type (npm, yarn, brew, apt) |
+| `install[].package` | Package name |
+| `install[].bins` | Binaries provided |
+| `install[].label` | UI display label |
 
 ## Differences from Claude Code Plugin
 
