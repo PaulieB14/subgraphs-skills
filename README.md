@@ -1,4 +1,4 @@
-# Graph Protocol Subgraphs Skills
+# Subgraphs Skills
 
 [![Claude Code](https://img.shields.io/badge/Claude%20Code-Plugin-blueviolet)](https://claude.ai/claude-code)
 [![OpenClaw](https://img.shields.io/badge/OpenClaw-Skills-orange)](https://github.com/openclaw/openclaw)
